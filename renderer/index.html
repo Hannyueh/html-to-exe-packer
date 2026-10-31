@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML to EXE Packer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📦 HTML to EXE Packer</h1>
+    <p class="subtitle">将 HTML/CSS/JS 项目打包成独立 Windows EXE 文件</p>
+
+    <!-- Section 1: Project Directory -->
+    <div class="form-group">
+      <label for="projectPath">项目目录 <span class="required">*</span></label>
+      <div class="input-row">
+        <input type="text" id="projectPath" placeholder="选择包含 index.html 的目录..." readonly>
+        <button type="button" class="btn-browse" id="btnBrowseProject">浏览...</button>
+      </div>
+      <span class="hint">必须包含 index.html</span>
+    </div>
+
+    <!-- Section 2: App Name -->
+    <div class="form-group">
+      <label for="appName">应用名称 <span class="required">*</span></label>
+      <input type="text" id="appName" placeholder="例如：我的应用" maxlength="64">
+    </div>
+
+    <!-- Section 3: Output Directory -->
+    <div class="form-group">
+      <label for="outputDir">输出目录 <span class="required">*</span></label>
+      <div class="input-row">
+        <input type="text" id="outputDir" placeholder="选择 EXE 保存位置..." readonly>
+        <button type="button" class="btn-browse" id="btnBrowseOutput">浏览...</button>
+      </div>
+    </div>
+
+    <!-- Section 4: Icon -->
+    <div class="form-group">
+      <label for="iconPath">应用图标 <span class="optional">(可选)</span></label>
+      <div class="input-row">
+        <input type="text" id="iconPath" placeholder="选择 .ico 或 .png 文件..." readonly>
+        <button type="button" class="btn-browse" id="btnBrowseIcon">浏览...</button>
+      </div>
+      <span class="hint">支持 .ico / .png 格式</span>
+    </div>
+
+    <!-- Section 5: Window Options -->
+    <fieldset class="options-group">
+      <legend>窗口选项（游戏相关）</legend>
+
+      <div class="checkbox-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="chkFrameless">
+          <span>无边框窗口</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="chkFullscreen">
+          <span>全屏启动</span>
+        </label>
+      </div>
+
+      <div class="size-row">
+        <div class="size-item">
+          <label for="winWidth">窗口宽度</label>
+          <input type="number" id="winWidth" value="1280" min="100" max="9999">
+        </div>
+        <div class="size-item">
+          <label for="winHeight">窗口高度</label>
+          <input type="number" id="winHeight" value="720" min="100" max="9999">
+        </div>
+      </div>
+
+      <p class="hint" style="margin-top: 6px;">
+        无边框模式下，你需要在 HTML 中自行实现关闭按钮等控件。
+      </p>
+    </fieldset>
+
+    <!-- Section 6: Package Mode -->
+    <fieldset class="options-group">
+      <legend>打包方式</legend>
+      <div class="radio-row">
+        <label class="radio-label">
+          <input type="radio" name="packageMode" id="modeFolder" value="folder" checked>
+          <span>文件夹版 <span class="recommended">（推荐，启动快）</span></span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="packageMode" id="modeSingle" value="single">
+          <span>单文件 EXE <span class="optional">（启动较慢）</span></span>
+        </label>
+      </div>
+      <p class="hint" style="margin-top: 6px;">
+        单文件 EXE 每次启动前需把内置文件解压到临时目录，因此启动较慢；
+        文件夹版直接读取文件、启动更快，但需要把整个文件夹一起分发。
+      </p>
+    </fieldset>
+
+    <!-- Build Button -->
+    <div class="button-row">
+      <button type="button" class="btn-build" id="btnBuild">打  包</button>
+      <button type="button" class="btn-cancel hidden" id="btnCancel">取消</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar hidden" id="progressBar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text hidden" id="progressText"></div>
+
+    <!-- Log Output -->
+    <div class="log-section">
+      <div class="log-header">
+        <span>构建日志</span>
+        <button type="button" class="btn-clear" id="btnClearLog">清空</button>
+      </div>
+      <div class="log-output" id="logOutput">
+        <div class="log-line log-info">等待开始打包...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

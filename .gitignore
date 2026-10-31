@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.temp/
+*.exe
+
+# 本地编辑器/工具配置，不上传
+.claude/settings.local.json
+
