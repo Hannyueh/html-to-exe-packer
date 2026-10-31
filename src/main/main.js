@@ -19,7 +19,7 @@ let currentBuildProcess = null;  // so we can cancel it
 const electronVersion = (() => {
   try {
     return JSON.parse(fs.readFileSync(
-      path.join(__dirname, 'node_modules', 'electron', 'package.json'), 'utf-8'
+      path.join(__dirname, '..', '..', 'node_modules', 'electron', 'package.json'), 'utf-8'
     )).version;
   } catch (_) {
     return '35.7.5'; // fallback
@@ -50,7 +50,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
   mainWindow.setMenuBarVisibility(false);
 }
 

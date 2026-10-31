@@ -3,6 +3,11 @@ dist/
 .temp/
 *.exe
 
-# ���ر༭��/�������ã����ϴ�
+# 本地编辑器/工具配置，不上传
 .claude/settings.local.json
 
+# 系统 / 编辑器杂项
+.DS_Store
+Thumbs.db
+*.log
+.vscode/

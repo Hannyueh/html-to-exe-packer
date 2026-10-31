@@ -264,22 +264,29 @@ win.loadURL('app://bundle/app/index.html');
 
 ```
 Electron打包/
-├── 启动.bat           ← 双击启动（自动装依赖 + 下载 Electron 二进制）
-├── 启动.ps1           ← PowerShell 启动脚本
-├── package.json       ← 工具自身依赖（electron 35.7.5, uuid）
-├── main.js            ← 主进程：完整打包流水线 + 类型识别
-├── preload.js         ← 安全 IPC 桥接（contextBridge）
-├── renderer/
-│   ├── index.html     ← 工具 GUI
-│   ├── style.css
-│   └── renderer.js    ← 界面逻辑与打包进度显示
+├── 启动.bat              ← 双击启动（自动装依赖 + 下载 Electron 二进制）
+├── 启动.ps1              ← PowerShell 启动脚本
+├── package.json          ← 工具自身依赖（electron 35.7.5, uuid）、脚本与仓库信息
+├── package-lock.json
+├── src/
+│   ├── main/
+│   │   ├── main.js       ← 主进程：完整打包流水线 + 类型识别
+│   │   └── preload.js    ← 安全 IPC 桥接（contextBridge）
+│   └── renderer/
+│       ├── index.html    ← 工具 GUI
+│       ├── style.css
+│       └── renderer.js   ← 界面逻辑与打包进度显示
 ├── template/
-│   └── main.js        ← 静态网页分支注入到产物的壳模板
+│   └── main.js           ← 静态网页分支的壳模板参考
+├── .editorconfig         ← 编辑器统一配置
+├── .gitattributes        ← 换行符 / 二进制文件规则
+├── .gitignore
+├── LICENSE               ← MIT（© 2026 Hannyueh）
 ├── README.md
-└── node_modules/
+└── node_modules/         ← 依赖目录，不纳入版本控制
 ```
 
-> `template/main.js` 为旧版静态壳模板参考；当前实际使用的壳模板已内联在 `main.js` 中。
+> `template/main.js` 为旧版静态壳模板参考；当前实际使用的壳模板已内联在 `src/main/main.js` 中。
 
 ---
 
@@ -287,7 +294,7 @@ Electron打包/
 
 ### Q: 打包卡在 `npm warn config production Use --omit=dev instead`？
 
-这是旧版 `--production` 参数触发的弃用告警。当前版本已改用 `--omit=dev --no-audit --no-fund`，并补全了 npm 镜像源，不会再卡住。
+这是旧版 `--production` 参数触发的弃用告警。当前版本改用 `npm install --no-audit --no-fund`（**不**加 `--omit=dev`，否则 `devDependencies` 里的 electron-builder 会被跳过），并补全了 npm 镜像源，不会再卡住。
 
 ### Q: 打包后缺失部分文件（如 index.html）？
 
@@ -330,4 +337,4 @@ Electron 二进制约 120 MB，工具已内置 `npmmirror.com` 镜像。仍失�
 
 ## 许可
 
-MIT License
+[MIT License](./LICENSE) © 2026 Hannyueh

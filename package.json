@@ -2,12 +2,33 @@
   "name": "html-to-exe-packer",
   "version": "1.0.0",
   "description": "将 HTML/CSS/JS 项目打包成独立 Windows EXE 文件",
-  "main": "main.js",
+  "main": "src/main/main.js",
+  "private": true,
   "scripts": {
     "start": "electron ."
   },
-  "author": "",
+  "author": "Hannyueh",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hannyueh/html-to-exe-packer.git"
+  },
+  "homepage": "https://github.com/Hannyueh/html-to-exe-packer#readme",
+  "bugs": {
+    "url": "https://github.com/Hannyueh/html-to-exe-packer/issues"
+  },
+  "keywords": [
+    "electron",
+    "electron-builder",
+    "html",
+    "exe",
+    "windows",
+    "packager",
+    "portable"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "uuid": "^11.1.0"
   },
